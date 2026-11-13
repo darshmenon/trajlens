@@ -1,0 +1,130 @@
+{
+  "samples": 301,
+  "duration_s": 3.0,
+  "moving_time_s": 3.0,
+  "median_dt_s": 0.010000000000000009,
+  "max_dt_s": 0.010000000000000231,
+  "segments": 1,
+  "path_length_rad": 2.3479572960394814,
+  "max_speed": 1.3455124544202506,
+  "max_jerk_norm": 15.193028829083866,
+  "rms_jerk_norm": 6.593527344506315,
+  "normalized_jerk": 53.344539924477246,
+  "movements": 1,
+  "sparc": -1.875844459332427,
+  "min_time_bound_s": 0.39482612801849254,
+  "joints": {
+    "shoulder_pan_joint": {
+      "min_pos": -0.952833,
+      "max_pos": 0.28755,
+      "range": 1.240383,
+      "max_vel": 0.7192999999999996,
+      "rms_vel": 0.4619551729539751,
+      "max_acc": 1.2900000000000134,
+      "max_jerk": 7.249999999996412,
+      "path_length": 1.240383,
+      "vel_limit": 3.141593,
+      "lower": -6.283185,
+      "upper": 6.283185,
+      "vel_utilization": 0.22896027588551401,
+      "pos_margin": 0.424175955347487
+    },
+    "shoulder_lift_joint": {
+      "min_pos": -1.743914,
+      "max_pos": -1.340722,
+      "range": 0.403192,
+      "max_vel": 0.5038499999999999,
+      "rms_vel": 0.32061867001386873,
+      "max_acc": 1.035000000000963,
+      "max_jerk": 6.499999999967075,
+      "path_length": 0.8061590000000001,
+      "vel_limit": 3.141593,
+      "lower": -6.283185,
+      "upper": 6.283185,
+      "vel_utilization": 0.16038041846922882,
+      "pos_margin": 0.3612237265017662
+    },
+    "elbow_joint": {
+      "min_pos": 1.697387,
+      "max_pos": 1.868139,
+      "range": 0.17075200000000001,
+      "max_vel": 0.21330000000000382,
+      "rms_vel": 0.13559717182391615,
+      "max_acc": 0.44000000000039563,
+      "max_jerk": 2.8750000000243805,
+      "path_length": 0.3409470000000001,
+      "vel_limit": 3.141593,
+      "lower": -3.141593,
+      "upper": 3.141593,
+      "vel_utilization": 0.06789549123645355,
+      "pos_margin": 0.20267647655186397
+    },
+    "wrist_1_joint": {
+      "min_pos": -2.098003,
+      "max_pos": -1.524286,
+      "range": 0.5737169999999998,
+      "max_vel": 0.717000000000013,
+      "rms_vel": 0.4562091788865415,
+      "max_acc": 1.4725000000019843,
+      "max_jerk": 9.000000000085597,
+      "path_length": 1.1470849999999997,
+      "vel_limit": 6.283185,
+      "lower": -6.283185,
+      "upper": 6.283185,
+      "vel_utilization": 0.11411409977583233,
+      "pos_margin": 0.3330462178019587
+    },
+    "wrist_2_joint": {
+      "min_pos": -1.570797,
+      "max_pos": -1.570793,
+      "range": 3.999999999892978e-06,
+      "max_vel": 5.000000001587068e-05,
+      "rms_vel": 9.113532706731587e-06,
+      "max_acc": 0.002500000000793573,
+      "max_jerk": 0.250000000079355,
+      "path_length": 4.999999999810711e-06,
+      "vel_limit": 6.283185,
+      "lower": -6.283185,
+      "upper": 6.283185,
+      "vel_utilization": 7.957747546168175e-06,
+      "pos_margin": 0.37499994031689343
+    },
+    "wrist_3_joint": {
+      "min_pos": -2.523629,
+      "max_pos": -1.283248,
+      "range": 1.2403810000000002,
+      "max_vel": 0.7193499999999915,
+      "rms_vel": 0.461954731812746,
+      "max_acc": 1.287500000000815,
+      "max_jerk": 7.249999999956445,
+      "path_length": 1.2403810000000002,
+      "vel_limit": 6.283185,
+      "lower": -6.283185,
+      "upper": 6.283185,
+      "vel_utilization": 0.1144881139103801,
+      "pos_margin": 0.2991759752418558
+    }
+  },
+  "time_ratio": 7.598281337296625,
+  "tip_path_length_m": 0.48069115511889793,
+  "tip_max_speed_mps": 0.25916364325409263,
+  "tip_start": [
+    0.28001144061706706,
+    -0.20000164062459974,
+    0.20000277470984698
+  ],
+  "tip_end": [
+    0.2799443877337064,
+    0.19995320929055418,
+    0.1999555295934296
+  ],
+  "findings": [
+    {
+      "level": "INFO",
+      "code": "SLOW_PROFILE",
+      "message": "moving time 3.00s is 7.6x the velocity-limit bound of 0.39s",
+      "hint": "the trajectory takes much longer than the velocity limits require; raise the velocity scaling"
+    }
+  ],
+  "source": "examples/data/ur3_smooth.csv"
+}

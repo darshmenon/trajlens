@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!-- Joint limits of the UR3 from ur_description/config/ur3/joint_limits.yaml (velocity 180 deg/s on the three big
+     joints and 360 deg/s on the wrists, position +-360 deg except the elbow at +-180 deg). Only the limits matter here. -->
+<robot name="ur3_limits">
+  <joint name="shoulder_pan_joint" type="revolute"><limit lower="-6.283185" upper="6.283185" velocity="3.141593" effort="56"/></joint>
+  <joint name="shoulder_lift_joint" type="revolute"><limit lower="-6.283185" upper="6.283185" velocity="3.141593" effort="56"/></joint>
+  <joint name="elbow_joint" type="revolute"><limit lower="-3.141593" upper="3.141593" velocity="3.141593" effort="28"/></joint>
+  <joint name="wrist_1_joint" type="revolute"><limit lower="-6.283185" upper="6.283185" velocity="6.283185" effort="12"/></joint>
+  <joint name="wrist_2_joint" type="revolute"><limit lower="-6.283185" upper="6.283185" velocity="6.283185" effort="12"/></joint>
+  <joint name="wrist_3_joint" type="revolute"><limit lower="-6.283185" upper="6.283185" velocity="6.283185" effort="12"/></joint>
+</robot>

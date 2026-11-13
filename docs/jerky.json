@@ -1,0 +1,144 @@
+{
+  "samples": 301,
+  "duration_s": 3.0,
+  "moving_time_s": 3.0,
+  "median_dt_s": 0.010000000000000009,
+  "max_dt_s": 0.010000000000000231,
+  "segments": 1,
+  "path_length_rad": 2.2759536306029933,
+  "max_speed": 0.8171938050426066,
+  "max_jerk_norm": 2434.517248732251,
+  "rms_jerk_norm": 222.61414038081935,
+  "normalized_jerk": 1864.2881152458017,
+  "movements": 1,
+  "sparc": -2.3203097986194576,
+  "min_time_bound_s": 0.39482612801849254,
+  "joints": {
+    "shoulder_pan_joint": {
+      "min_pos": -0.952833,
+      "max_pos": 0.28755,
+      "range": 1.240383,
+      "max_vel": 0.46715000000000373,
+      "rms_vel": 0.4169093662808392,
+      "max_acc": 5.3574999999998525,
+      "max_jerk": 267.8749999999835,
+      "path_length": 1.240383,
+      "vel_limit": 3.141593,
+      "lower": -6.283185,
+      "upper": 6.283185,
+      "vel_utilization": 0.14869844693440676,
+      "pos_margin": 0.424175955347487
+    },
+    "shoulder_lift_joint": {
+      "min_pos": -1.743914,
+      "max_pos": -1.340722,
+      "range": 0.403192,
+      "max_vel": 0.26880000000002724,
+      "rms_vel": 0.26827259539542925,
+      "max_acc": 26.87249999999961,
+      "max_jerk": 1343.625000000015,
+      "path_length": 0.8061590000000001,
+      "vel_limit": 3.141593,
+      "lower": -6.283185,
+      "upper": 6.283185,
+      "vel_utilization": 0.08556168797168419,
+      "pos_margin": 0.3612237265017662
+    },
+    "elbow_joint": {
+      "min_pos": 1.697389,
+      "max_pos": 1.868139,
+      "range": 0.17074999999999996,
+      "max_vel": 0.1139499999999316,
+      "rms_vel": 0.113459379979425,
+      "max_acc": 11.362499999999178,
+      "max_jerk": 568.1249999998873,
+      "path_length": 0.340943,
+      "vel_limit": 3.141593,
+      "lower": -3.141593,
+      "upper": 3.141593,
+      "vel_utilization": 0.03627140753112565,
+      "pos_margin": 0.20267647655186397
+    },
+    "wrist_1_joint": {
+      "min_pos": -2.098003,
+      "max_pos": -1.524286,
+      "range": 0.5737169999999998,
+      "max_vel": 0.38254999999998063,
+      "rms_vel": 0.38172583805684346,
+      "max_acc": 38.23749999999958,
+      "max_jerk": 1911.8749999999773,
+      "path_length": 1.1470849999999997,
+      "vel_limit": 6.283185,
+      "lower": -6.283185,
+      "upper": 6.283185,
+      "vel_utilization": 0.060884726456403984,
+      "pos_margin": 0.3330462178019587
+    },
+    "wrist_2_joint": {
+      "min_pos": -1.570797,
+      "max_pos": -1.570793,
+      "range": 3.999999999892978e-06,
+      "max_vel": 5.000000000165983e-05,
+      "rms_vel": 9.11353270699061e-06,
+      "max_acc": 0.0025000000000829996,
+      "max_jerk": 0.25000000000830214,
+      "path_length": 4.999999999810711e-06,
+      "vel_limit": 6.283185,
+      "lower": -6.283185,
+      "upper": 6.283185,
+      "vel_utilization": 7.957747543906447e-06,
+      "pos_margin": 0.37499994031689343
+    },
+    "wrist_3_joint": {
+      "min_pos": -2.523629,
+      "max_pos": -1.283248,
+      "range": 1.2403810000000002,
+      "max_vel": 0.4671000000000305,
+      "rms_vel": 0.4169087500147611,
+      "max_acc": 5.360000000000291,
+      "max_jerk": 268.00000000004985,
+      "path_length": 1.2403810000000002,
+      "vel_limit": 6.283185,
+      "lower": -6.283185,
+      "upper": 6.283185,
+      "vel_utilization": 0.07434127755271101,
+      "pos_margin": 0.2991759752418558
+    }
+  },
+  "time_ratio": 7.598281337296625,
+  "tip_path_length_m": 0.48030436057067716,
+  "tip_max_speed_mps": 0.17669908287000627,
+  "tip_start": [
+    0.28001144061706706,
+    -0.20000164062459974,
+    0.20000277470984698
+  ],
+  "tip_end": [
+    0.2799443877337064,
+    0.19995320929055418,
+    0.1999555295934296
+  ],
+  "findings": [
+    {
+      "level": "WARN",
+      "code": "JERK_SPIKE",
+      "message": "1 jerk spike(s), worst 2435 rad/s^3 at t=1.49s (11x the rms jerk)",
+      "hint": "a sudden jerk peak, typically a velocity or direction jump at a waypoint; blend or time-parameterize with continuous acceleration",
+      "t_start": 1.49,
+      "t_end": 1.51
+    },
+    {
+      "level": "WARN",
+      "code": "ROUGH",
+      "message": "normalized jerk 1864 (minimum-jerk reaching is about 19)",
+      "hint": "high normalized jerk overall; the trajectory is noisy or piecewise-linear (try --smooth to see if it is sensor noise)"
+    },
+    {
+      "level": "INFO",
+      "code": "SLOW_PROFILE",
+      "message": "moving time 3.00s is 7.6x the velocity-limit bound of 0.39s",
+      "hint": "the trajectory takes much longer than the velocity limits require; raise the velocity scaling"
+    }
+  ],
+  "source": "examples/data/ur3_jerky.csv"
+}

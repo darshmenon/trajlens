@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "trajlens"
+version = "0.1.0"
+description = "Quality metrics, findings and plots for robot arm joint trajectories (planned or executed)."
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+authors = [{ name = "darshmenon" }]
+requires-python = ">=3.10"
+dependencies = ["numpy", "matplotlib"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering",
+]
+
+[project.urls]
+Homepage = "https://github.com/darshmenon/trajlens"
+Changelog = "https://github.com/darshmenon/trajlens/blob/main/CHANGELOG.md"
+
+[project.optional-dependencies]
+fk = ["mujoco"]
+test = ["pytest", "mujoco"]
+
+[project.scripts]
+trajlens = "trajlens.cli:main"
+
+[tool.setuptools]
+packages = ["trajlens"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
