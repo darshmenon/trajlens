@@ -1,8 +1,28 @@
 """Trajectory quality metrics: derivatives, smoothness, limit margins, path lengths."""
 import math
+import os
 import xml.etree.ElementTree as ET
 
 import numpy as np
+
+try:                                   # optional C++ core, built by setup.py when pybind11 and a compiler are present
+    if os.environ.get("TRAJLENS_NO_CPP"):
+        raise ImportError
+    from trajlens import _fast
+except ImportError:
+    _fast = None
+
+
+def have_cpp():
+    return _fast is not None
+
+
+def grad(f, t, edge_order=1):
+    """np.gradient(f, t, axis=0, edge_order=...) for a (n, m) array and non-uniform times, in C++ when available."""
+    f = np.asarray(f, dtype=float)
+    if _fast is not None and f.ndim == 2 and len(t) >= edge_order + 1:
+        return _fast.gradient(np.asarray(t, dtype=float), f, edge_order)
+    return np.gradient(f, t, axis=0, edge_order=edge_order)
 
 
 # ---------------------------------------------------------------- limits
@@ -62,13 +82,13 @@ def derivatives(t, q, gap_factor=10.0, smooth=None):
         if n < 3:
             continue
         ts, qs = t[lo:hi], _smooth(q[lo:hi], smooth)
-        vs = np.gradient(qs, ts, axis=0, edge_order=2)
+        vs = grad(qs, ts, 2)
         v[lo:hi] = vs
         if n >= 4:
-            as_ = np.gradient(vs, ts, axis=0, edge_order=2)
+            as_ = grad(vs, ts, 2)
             a[lo:hi] = as_
             if n >= 6:
-                js = np.gradient(as_, ts, axis=0, edge_order=2)
+                js = grad(as_, ts, 2)
                 js[[0, -1]] = np.nan          # the outermost jerk samples are third-order one-sided: not trusted
                 j[lo:hi] = js
     return v, a, j
@@ -112,7 +132,7 @@ def normalized_jerk(t, q, gap_factor=10.0, smooth=None):
 def rest_intervals(t, q, gap_factor=10.0, rest_frac=0.02, rest_min_s=0.1):
     """(t_start, t_end) of rests: speed below rest_frac of the peak speed for at least rest_min_s, per gap-free segment."""
     segs = [(lo, hi) for lo, hi in segments(t, gap_factor) if hi - lo >= 3]
-    sps = {s: np.linalg.norm(np.gradient(q[s[0]:s[1]], t[s[0]:s[1]], axis=0), axis=1) for s in segs}
+    sps = {s: np.linalg.norm(grad(q[s[0]:s[1]], t[s[0]:s[1]]), axis=1) for s in segs}
     peak = max((sp.max() for sp in sps.values()), default=0.0)
     out = []
     if peak <= 0:
@@ -164,7 +184,7 @@ def sparc(t, q, gap_factor=10.0, smooth=None, fc=10.0, amp_threshold=0.05, pad_l
     if hi - lo < 8:
         return float("nan")
     ts, qs = t[lo:hi], _smooth(q[lo:hi], smooth)
-    speed = np.linalg.norm(np.gradient(qs, ts, axis=0), axis=1)
+    speed = np.linalg.norm(grad(qs, ts), axis=1)
     if speed.max() < 1e-9:
         return float("nan")
     fs = (len(ts) - 1) / (ts[-1] - ts[0])
@@ -241,7 +261,7 @@ def analyze(tr, limits=None, tip=None, gap_factor=10.0, smooth=None, jerk_limit=
             if hi - lo >= 2:
                 tl += float(np.sum(np.linalg.norm(np.diff(tip[lo:hi], axis=0), axis=1)))
             if hi - lo >= 3:
-                tv[lo:hi] = np.linalg.norm(np.gradient(tip[lo:hi], t[lo:hi], axis=0), axis=1)
+                tv[lo:hi] = np.linalg.norm(grad(tip[lo:hi], t[lo:hi]), axis=1)
         out["tip_path_length_m"] = tl
         out["tip_max_speed_mps"] = float(np.nanmax(tv)) if np.isfinite(tv).any() else float("nan")
         out["tip_start"] = [float(x) for x in tip[0]]

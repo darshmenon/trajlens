@@ -20,6 +20,10 @@ pip install .            # numpy and matplotlib
 pip install ".[fk]"      # adds mujoco for tip-space metrics
 ```
 
+## Speed
+
+`pip install .` also builds an optional C++ gradient (`trajlens._fast`) when a compiler is available. It is 2.3x faster for the derivatives and 1.5x for a whole analysis of a 500,000 sample, 6 joint recording (8.0 s to 5.3 s on one core); the zero-padded FFT in the SPARC metric dominates the rest. Results match numpy to 1e-8. `TRAJLENS_NO_CPP=1` forces numpy; `trajlens.metrics.have_cpp()` tells you which one you got.
+
 ## Quick start
 
 ```bash

@@ -15,5 +15,9 @@ jobs:
           python-version: "3.10"
       - name: Install
         run: python -m pip install ".[test]"
-      - name: Test
+      - name: The C++ core was built
+        run: python -c "from trajlens import metrics; assert metrics.have_cpp(), 'C++ core was not built'"
+      - name: Test (C++ core)
         run: python -m pytest -q
+      - name: Test (numpy fallback)
+        run: TRAJLENS_NO_CPP=1 python -m pytest -q

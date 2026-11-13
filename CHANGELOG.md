@@ -1,5 +1,8 @@
 # Changelog
 
+## Unreleased
+- Optional C++ core (`trajlens._fast`, built by `pip install .` when a compiler is present; pybind11 is a build requirement): the non-uniform finite-difference gradient behind velocity, acceleration, jerk and speed. On a 500,000 sample, 6 joint recording, `derivatives` took 0.69 s instead of 1.59 s (2.3x) and a full `analyze` 5.3 s instead of 8.0 s (1.5x). The rest is the zero-padded FFT in `sparc`, which numpy already runs in C, so it was left alone. `TRAJLENS_NO_CPP=1` forces numpy; results match to 1e-8.
+
 ## 0.1.0
 
 - First release.
