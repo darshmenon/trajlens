@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "trajlens"
-version = "0.1.0"
+version = "0.2.0"
 description = "Quality metrics, findings and plots for robot arm joint trajectories (planned or executed)."
 readme = "README.md"
 license = "Apache-2.0"

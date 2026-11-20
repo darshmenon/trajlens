@@ -1,0 +1,18 @@
+name: release
+on:
+  push:
+    tags: ['v*']
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: tag matches package version
+        run: test "v$(sed -n 's/^version = "\(.*\)"/\1/p' pyproject.toml)" = "${GITHUB_REF_NAME}"
+      - run: git archive --prefix=trajlens/ -o "$RUNNER_TEMP/trajlens-${GITHUB_REF_NAME}.tar.gz" HEAD
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ runner.temp }}/*.tar.gz
+          body_path: CHANGELOG.md
